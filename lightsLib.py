@@ -18,14 +18,15 @@ lights= connect()
 
 yellow = 12750
 green = 25500
-blue = 46920
-purple = 56100
-red = 65280
+blue=47000
+purple = 52800
+red = 65200
+white = 35000
 
 def change_color(color, bulb):
     lights[bulb].hue = color
     
-def change_color_all(colors=[purple],lights=range(1,4)):
+def change_color_all(colors=[red],lights=range(1,4)):
     lights = lights
     colors= colors
     for light in lights:
@@ -46,3 +47,4 @@ for i in range(1,100,1):
         lights[i].hue = 100
         time.sleep(1)
 '''
+change_color_all([blue])
