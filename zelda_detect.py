@@ -12,7 +12,7 @@ from collections import deque
 # import requests
 import pygame.mixer
 from pygame.mixer import Sound
-
+from lightsLib import *
 #audio stuff maybe
 # pygame.mixer.init(32000)
 # confirm = Sound("Music/OOT_Song_Correct.wav")#change accordingly for your song confirmation sound file name/location
@@ -80,7 +80,7 @@ freqNow = 1.0
 freqPast = 1.0
 
 #Set up audio sampler - 
-NUM_SAMPLES = 2048
+NUM_SAMPLES = 2048 *2
 SAMPLING_RATE = 44100 #make sure this matches the sampling rate of your mic!
 pa = pyaudio.PyAudio()
 _stream = pa.open(format=pyaudio.paInt16,
@@ -89,6 +89,7 @@ _stream = pa.open(format=pyaudio.paInt16,
                   frames_per_buffer=NUM_SAMPLES)
 
 #print("Alarm detector working. Press CTRL-C to quit.")
+lights =connect()
 
 while True:
     while _stream.get_read_available()< NUM_SAMPLES: sleep(0.01)
@@ -136,15 +137,18 @@ while True:
             print "What the heck is that?"#prints when sound is in range but not identifiable as note
 											#or when a note has already been registered and is "heard" again
 
+# Lights
     if notes==sun:
         print "\t\t\t\tSun song!"
 	# client.publish("songID", "1") #1=Sun
 	# confirm.play()
+	
 	notes.append('G')#append with 'G' to 'reset' notes, this keeps the song from triggering constantly
     if notes==time:
         print "song of Time!"
 	# client.publish("songID", "2") #2=Time
 	# confirm.play()
+
 	notes.append('G')
     if notes==storm:
         print "song of Storms!"
