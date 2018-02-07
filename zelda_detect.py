@@ -2,6 +2,7 @@
 #https://benchodroff.com/2017/02/18/using-a-raspberry-pi-with-a-microphone-to-hear-an-audio-alarm-using-fft-in-python/
 #Zelda song detection stolen from:
 # https://github.com/Sufficiently-Advanced/ZeldaHomeAutomation
+# Zelda songs downloaded from: http://www.zeldadungeon.net/Soundtracks-Ocarina-of-Time-Original-Soundtrack.php
 #!/usr/bin/env python
 import pyaudio
 from numpy import zeros,linspace,short,fromstring,hstack,transpose,log
@@ -14,8 +15,9 @@ import pygame.mixer
 from pygame.mixer import Sound
 from lightsLib import *
 #audio stuff maybe
-# pygame.mixer.init(32000)
-# confirm = Sound("Music/OOT_Song_Correct.wav")#change accordingly for your song confirmation sound file name/location
+pygame.mixer.init(32000)
+confirm = Sound("Music/OOT_Song_Correct.wav")
+#change accordingly for your song confirmation sound file name/location
 #mqtt stuff
 # client = mqtt.Client()
 # client.connect("localhost",1883,300)
@@ -90,7 +92,6 @@ _stream = pa.open(format=pyaudio.paInt16,
 
 #print("Alarm detector working. Press CTRL-C to quit.")
 lights =connect()
-
 while True:
     while _stream.get_read_available()< NUM_SAMPLES: sleep(0.01)
     audio_data  = fromstring(_stream.read(
@@ -141,25 +142,25 @@ while True:
     if notes==sun:
         print "\t\t\t\tSun song!"
 	# client.publish("songID", "1") #1=Sun
-	# confirm.play()
+	confirm.play()
 	change_color_all([yellow,white])
 	notes.append('G')#append with 'G' to 'reset' notes, this keeps the song from triggering constantly
     if notes==time:
         print "song of Time!"
 	# client.publish("songID", "2") #2=Time
-	# confirm.play()
+	confirm.play()
 	change_color_all([blue])
 	notes.append('G')
     if notes==storm:
         print "song of Storms!"
 	# client.publish("songID", "3") #3=Storm
-	# confirm.play()
+	confirm.play()
 	change_color_all([blue,purple])
 	notes.append('G')
     if notes==forest:
         print "Minuet of Forest!"
 	# client.publish("songID", "4") #4=Forest
-	# confirm.play()
+	confirm.play()
 	change_color_all([green,yellow])
 	notes.append('G')
     if notes==saria:
@@ -168,30 +169,30 @@ while True:
 	# requests.post("https://maker.ifttt.com/trigger/YOUR_EVENT_NAME/with/key/YOUR_KEY")#You'll need your own Maker account and ifttt event
 	change_color_all([green])
 	notes.append('G')
-	# confirm.play()
+	confirm.play()
 	_stream.start_stream()
     if notes==fire:
         print "Bolero of fire!"
 	# client.publish("songID", "6") #6=Fire
-	# confirm.play()
+	confirm.play()
 	change_color_all([red,yellow])
 	notes.append('G')
     if notes==epona:
         print "Epona's song!"
 	# client.publish("songID", "7") #7=Epona
-	# confirm.play()
+	confirm.play()
 	change_color_all([yellow])
 	notes.append('G')
     if notes==zelda:
         print "\t\t\t\tZelda's Lullaby!"
         # client.publish("songID", "8") #8=Zelda
-	# confirm.play()
-	change_color_all()	
+    	confirm.play()
+    	change_color_all()	
 	notes.append('G')
     if notes==heal:
 	print "Song of Healing!"
 	_stream.stop_stream()
-	# confirm.play()
+	confirm.play()
 	# client.publish("songID", "6")
 	# client.publish("songID", "1")
 	# client.publish("songID", "3")
@@ -201,5 +202,5 @@ while True:
 	_stream.start_stream()
     if notes==test:
         print "Test Sequence Activated!"
-        # confirm.play()
+        confirm.play()
         notes.append('G')
