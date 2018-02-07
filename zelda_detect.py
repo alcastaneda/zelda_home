@@ -12,11 +12,8 @@ from collections import deque
 # import paho.mqtt.client as mqtt
 # import requests
 from lightsLib import *
+from music import *
 
-#audio stuff maybe
-pygame.mixer.init(32000)
-confirm = Sound("Music/OOT_Song_Correct.wav")
-songs = ["epona.wav"]
 #change accordingly for your song confirmation sound file name/location
 #mqtt stuff
 # client = mqtt.Client()
@@ -82,7 +79,7 @@ freqNow = 1.0
 freqPast = 1.0
 
 #Set up audio sampler - 
-NUM_SAMPLES = 2048 *2
+NUM_SAMPLES = 2048 *4
 SAMPLING_RATE = 44100 #make sure this matches the sampling rate of your mic!
 pa = pyaudio.PyAudio()
 _stream = pa.open(format=pyaudio.paInt16,
@@ -142,64 +139,85 @@ while True:
     if notes==sun:
         print "\t\t\t\tSun song!"
     	# client.publish("songID", "1") #1=Sun
-    	confirm.play()
+    	_stream.stop_stream()
+        play_song(songs[0])
+        play_song(songs[7])
     	change_color_all([yellow,white])
     	notes.append('G')#append with 'G' to 'reset' notes, this keeps the song from triggering constantly
+        _stream.start_stream()
     if notes==time:
         print "song of Time!"
     	# client.publish("songID", "2") #2=Time
-    	confirm.play()
+    	_stream.stop_stream()
+        play_song(songs[0])
+        play_song(songs[8])
     	change_color_all([blue])
-	notes.append('G')
+        notes.append('G')
+        _stream.start_stream()
     if notes==storm:
         print "song of Storms!"
     	# client.publish("songID", "3") #3=Storm
-    	confirm.play()
+    	play_song(songs[0])
+        play_song(songs[6])
     	change_color_all([blue,purple])
     	notes.append('G')
+        _stream.start_stream()
     if notes==forest:
         print "Minuet of Forest!"
     	# client.publish("songID", "4") #4=Forest
-    	confirm.play()
+    	_stream.stop_stream()
+        play_song(songs[0])
+        play_song(songs[3])
     	change_color_all([green,yellow])
     	notes.append('G')
+        _stream.start_stream()
     if notes==saria:
         print "Saria's song!" #5=Saria
     	_stream.stop_stream()
         # requests.post("https://maker.ifttt.com/trigger/YOUR_EVENT_NAME/with/key/YOUR_KEY")#You'll need your own Maker account and ifttt event
     	change_color_all([green])
     	notes.append('G')
-    	confirm.play()
+    	play_song(songs[0])
+        play_song(songs[5])
     	_stream.start_stream()
     if notes==fire:
         print "Bolero of fire!"
     	# client.publish("songID", "6") #6=Fire
-    	confirm.play()
+    	_stream.start_stream()
+        play_song(songs[0])
+        play_song(songs[2])
     	change_color_all([red,yellow])
     	notes.append('G')
+        _stream.start_stream()
     if notes==epona:
         print "Epona's song!"
     	# client.publish("songID", "7") #7=Epona
-    	confirm.play()
+    	_stream.stop_stream()
+        play_song(songs[0])
+        play_song(songs[1])
     	change_color_all([yellow])
     	notes.append('G')
+        _stream.start_stream()
     if notes==zelda:
         print "\t\t\t\tZelda's Lullaby!"
         # client.publish("songID", "8") #8=Zelda
-    	confirm.play()
-    	change_color_all()	
-	    notes.append('G')
+    	_stream.stop_stream()
+        play_song(songs[0])
+        play_song(songs[9])
+    	change_color_all()
+        notes.append('G')
+        _stream.start_stream()
     if notes==heal:
     	print "Song of Healing!"
+        play_song(songs[0])
     	_stream.stop_stream()
-	    confirm.play()
-	# client.publish("songID", "6")
-	# client.publish("songID", "1")
-	# client.publish("songID", "3")
-	sleep(10)
-	# client.publish("songID", "8")
-	notes.append('G')
-	_stream.start_stream()
+    	# client.publish("songID", "6")
+    	# client.publish("songID", "1")
+    	# client.publish("songID", "3")
+    	sleep(10)
+    	# client.publish("songID", "8")
+    	notes.append('G')
+    	_stream.start_stream()
     if notes==test:
         print "Test Sequence Activated!"
         confirm.play()
