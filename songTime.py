@@ -13,7 +13,7 @@ def human_time(datetime_obj=datetime.now()):
     tens = ["twenty","thirty", "forty","fifty"]
     
     if(hr>12):
-        hr = hr/2
+        hr = hr-12
         tod = " p m"
     if(mi==0):
         human_str = singles[hr-1]
@@ -31,5 +31,4 @@ def human_time(datetime_obj=datetime.now()):
 
 
 
-
-# system("say -v Victoria it is currently `date +%H%M`")
+system('say -v Victoria The current time is '+human_time())
