@@ -29,7 +29,7 @@ def human_time(datetime_obj=datetime.now()):
 
     return human_str
 
-current=human_time()
 
-system('say -v Victoria The current time is '+current)
+
+
 # system("say -v Victoria it is currently `date +%H%M`")

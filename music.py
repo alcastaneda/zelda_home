@@ -4,7 +4,7 @@ import time
 
 pygame.mixer.init(32000)
 
-songs=["Music/OOT_Song_Correct.wav", "Music/epona.wav", "Music/fire.wav",
+songs=["Music/OOT_Song_Correct.wav", "Music/epona.wav", "Music/fire2.wav",
 		"Music/forest.wav", "Music/navi.wav", "Music/saria.wav",
 		"Music/storms.wav", "Music/sun.wav", "Music/time.wav", "Music/zelda.wav"]
 

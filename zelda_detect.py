@@ -13,6 +13,7 @@ from collections import deque
 # import requests
 from lightsLib import *
 from music import *
+from songTime import *
 
 #change accordingly for your song confirmation sound file name/location
 #mqtt stuff
@@ -88,7 +89,7 @@ _stream = pa.open(format=pyaudio.paInt16,
                   frames_per_buffer=NUM_SAMPLES)
 
 #print("Alarm detector working. Press CTRL-C to quit.")
-lights =connect()
+# lights =connect()
 while True:
     while _stream.get_read_available()< NUM_SAMPLES: sleep(0.01)
     audio_data  = fromstring(_stream.read(
@@ -151,6 +152,7 @@ while True:
     	_stream.stop_stream()
         play_song(songs[0])
         play_song(songs[8])
+        system('say -v Victoria The current time is '+human_time())
     	change_color_all([blue])
         notes.append('G')
         _stream.start_stream()
