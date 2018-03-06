@@ -30,5 +30,6 @@ def human_time(datetime_obj=datetime.now()):
     return human_str
 
 
-
-system('say -v Victoria The current time is '+human_time())
+# for MAC
+# system('say -v Victoria The current time is '+human_time())
+system('say The current time is '+human_time())
