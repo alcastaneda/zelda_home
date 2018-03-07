@@ -27,8 +27,6 @@ def change_color(color, bulb):
     lights[bulb].hue = color
     
 def change_color_all(colors=[red],lights=range(1,4)):
-    lights = lights
-    colors= colors
     for light in lights:
         if len(colors) == len(lights):
             for color in colors:
